@@ -1,0 +1,39 @@
+{
+  "name": "guild",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check-types": "tsc",
+    "watch": "babel --watch src ---out-dir lib --extensions '.ts,.tsx'",
+    "build": "babel src --out-dir lib --extensions '.ts,.tsx'",
+    "copy-schema": "rm -rf lib/schema/* && cp -r src/schema/ lib/schema/",
+    "tsc": "tsc",
+    "loadInit": "babel src --out-dir lib --extensions '.ts,.tsx'; babel-node load.js",
+    "start": "nodemon"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/preset-typescript": "^7.9.0",
+    "@babel/register": "^7.9.0",
+    "apollo-server-express": "^2.12.0",
+    "babel-core": "^6.26.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.7",
+    "nodemon": "^2.0.3",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.5",
+    "@types/mongoose": "^5.7.10"
+  }
+}

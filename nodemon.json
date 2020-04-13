@@ -1,0 +1,6 @@
+{
+  "watch": ["src"],
+  "ext": "ts,graphql",
+  "ignore": ["src/**/*.spec.ts"],
+  "exec": "babel src --out-dir lib --extensions '.ts,.tsx'; npm run copy-schema; babel-node start.js"
+}

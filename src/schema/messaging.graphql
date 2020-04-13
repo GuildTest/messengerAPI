@@ -1,0 +1,82 @@
+scalar DateTime
+
+type Query {
+  getAllUsers: [User]
+  recentMessage(first: Int, since: DateTime): MessageConnection
+  recentGroup(first: Int, since: DateTime): GroupConnection
+}
+
+type Message {
+  id: ID
+  content: String
+  createdAt: DateTime
+  sender: User
+  group: Group
+}
+
+type Group {
+  id: ID
+  name: String
+  createdAt: DateTime
+  participant: [User]
+  MessageConnection(first: Int, since: DateTime): MessageConnection
+}
+
+type User {
+  id: ID
+  name: String
+  createdAt: DateTime
+  password: String
+  MessageConnection(first: Int, since: DateTime): MessageConnection
+  GroupConnection(first: Int, since: DateTime): GroupConnection
+}
+
+type MessageConnection {
+  nodes: [Message]
+  pageInfo: PageInfo
+}
+
+type GroupConnection {
+  nodes: [Group]
+  pageInfo: PageInfo
+}
+
+type PageInfo {
+  hasNextPage: Boolean
+}
+
+type Mutation {
+  createUser(object: CreateUserInput): CreateUserMutationResponse
+  createGroup(object: CreateGroupInput): CreateGroupMutationResponse
+  createMessage(object: CreateMessageInput): CreateMessageMutationResponse
+}
+
+input CreateUserInput {
+  name: String
+  password: String
+}
+
+input CreateGroupInput {
+  name: String
+  participant: [ID]
+}
+
+input CreateMessageInput {
+  content: String
+  group: ID
+}
+
+type CreateUserMutationResponse {
+  success: Boolean
+  user: User
+}
+
+type CreateGroupMutationResponse {
+  success: Boolean
+  group: Group
+}
+
+type CreateMessageMutationResponse {
+  success: Boolean
+  message: Message
+}
