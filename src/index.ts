@@ -5,6 +5,8 @@ import { schema as typeDefs } from "./schema";
 import { resolvers } from "./resolvers";
 import { getConnection, getUserId } from "./database/index";
 
+// Change this name to change perspective:
+// this replace authentication and authorization (not in scope for that exercice)
 const name = "kevin";
 
 const app = express();

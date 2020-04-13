@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// default class use for all Connection across GraphQL Schema
 export class FetchConnection<T extends mongoose.Document> {
   Model: mongoose.Model<T>;
   id: string;
@@ -32,15 +33,11 @@ export class FetchConnection<T extends mongoose.Document> {
       condition = { ...condition, createdAt: { $gte: this.since } };
     }
 
-    console.log("condition");
-    console.log(condition);
-
     try {
       nodes = await this.Model.find(condition)
         .limit(this.first + 1) //Fetch one more to see if there is more data to be loaded (used for hasNextPage)
+        .sort({ createdAt: -1 }) // you want the last messages, not the first ones.
         .exec();
-      console.log("nodes");
-      console.log(nodes);
     } catch (error) {
       console.error("> error: ", error);
 

@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// default class use for direct link across GraphQL Schema
 export class FetchById<T extends mongoose.Document> {
   Model: mongoose.Model<T>;
   id: string | string[];
@@ -29,11 +30,11 @@ export class FetchById<T extends mongoose.Document> {
   async getMultiple(): Promise<T[]> {
     let Documents: T[];
 
+    var condition: any = { _id: this.id };
     try {
-      Documents = (await this.Model.find()
-        .where("_id")
-        .in([...this.id])
-        .exec()) || [new this.Model()];
+      Documents = (await this.Model.find(condition).exec()) || [
+        new this.Model(),
+      ];
     } catch (error) {
       console.error("> error: ", error);
 
